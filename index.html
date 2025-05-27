@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIFHand: Enhancing Hand Pose Estimation with Visual and Sparse IMU Fusion Benchmark</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#FF7D00',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.03);
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.8s ease-in-out;
+            }
+            .animate-slide-up {
+                animation: slideUp 0.8s ease-out;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translateY(20px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-light text-dark antialiased">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed w-full bg-white/90 backdrop-blur-md z-50 transition-all duration-300 shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-primary text-2xl"><i class="fa fa-cube"></i></span>
+                <span class="font-bold text-xl text-primary">VIFHand</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#abstract" class="font-medium hover:text-primary transition-colors">Abstract</a>
+                <a href="#method" class="font-medium hover:text-primary transition-colors">Method</a>
+                <a href="#results" class="font-medium hover:text-primary transition-colors">Results</a>
+                <a href="#paper" class="font-medium hover:text-primary transition-colors">Paper</a>
+                <a href="#citation" class="font-medium hover:text-primary transition-colors">Citation</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-dark focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg animate-fade-in">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#abstract" class="font-medium py-2 hover:text-primary transition-colors">Abstract</a>
+                <a href="#method" class="font-medium py-2 hover:text-primary transition-colors">Method</a>
+                <a href="#results" class="font-medium py-2 hover:text-primary transition-colors">Results</a>
+                <a href="#paper" class="font-medium py-2 hover:text-primary transition-colors">Paper</a>
+                <a href="#citation" class="font-medium py-2 hover:text-primary transition-colors">Citation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-primary/5 to-light">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark mb-6 animate-fade-in">
+                    VIFHand: Enhancing Hand Pose Estimation with Visual and Sparse IMU Fusion Benchmark 
+                </h1>
+                <p class="text-[clamp(1.1rem,2vw,1.3rem)] text-gray-600 mb-8 animate-slide-up">
+                    
+                </p>
+                <!-- 作者列表 - 重新设计的排版 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 mb-10 max-w-4xl mx-auto animate-slide-up" style="animation-delay: 0.2s;">
+                    <!-- 第一行作者 -->
+                    <a href="#" class="text-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                        <span class="block font-medium text-primary">Xinyi Wang</span>
+                        <span class="text-sm text-gray-500 block mt-1">Shanghai Jiao Tong University</span>
+                    </a>
+                    <a href="#" class="text-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                        <span class="block font-medium text-primary">Pengfei Ren</span>
+                        <span class="text-sm text-gray-500 block mt-1">Beijing University of Posts and Telecommunications</span>
+                    </a>
+                    <a href="#" class="text-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                        <span class="block font-medium text-primary">Haoyang Zhang</span>
+                        <span class="text-sm text-gray-500 block mt-1">Defense Innovation Institute,
+                            Academy of Military Sciences</span>
+                    </a>
+                    <a href="#" class="text-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                        <span class="block font-medium text-primary">Xin Sheng</span>
+                        <span class="text-sm text-gray-500 block mt-1">Tianjin University</span>
+                    </a>
+                    <!-- 第二行作者 -->
+                    <a href="#" class="text-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                        <span class="block font-medium text-primary">Da Li</span>
+                        <span class="text-sm text-gray-500 block mt-1">Nankai University</span>
+                    </a>
+                    <a href="#" class="text-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                        <span class="block font-medium text-primary">Liang Xie</span>
+                        <span class="text-sm text-gray-500 block mt-1">Defense Innovation Institute,
+                            Academy of Military Sciences</span>
+                    </a>
+                    <a href="#" class="text-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                        <span class="block font-medium text-primary">Yue Gao</span>
+                        <span class="text-sm text-gray-500 block mt-1">Shanghai Jiao Tong University</span>
+                    </a>
+                    <a href="#" class="text-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                        <span class="block font-medium text-primary">Erwei Yin</span>
+                        <span class="text-sm text-gray-500 block mt-1">Defense Innovation Institute,
+                            Academy of Military Sciences</span>
+                    </a>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 animate-slide-up" style="animation-delay: 0.4s;">
+                    <a href="#paper" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
+                        <i class="fa fa-file-pdf-o mr-2"></i> Paper
+                    </a>
+                    <a href="#" class="px-6 py-3 bg-secondary hover:bg-secondary/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
+                        <i class="fa fa-github mr-2"></i> Code
+                    </a>
+                    <a href="#" class="px-6 py-3 bg-dark hover:bg-dark/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
+                        <i class="fa fa-youtube-play mr-2"></i> Video
+                    </a>
+                    <a href="#" class="px-6 py-3 bg-white hover:bg-gray-50 text-primary border border-primary rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
+                        <i class="fa fa-database mr-2"></i> Dataset
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- 摘要部分 -->
+        <section id="abstract" class="py-12 scroll-mt-24">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Abstract</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction and AR/VR applications.However, vision-based approaches often suffer from limited fields of view and occlusions, while methods that rely on sparse inertial measurement units (IMUs) struggle to capture fine-grained hand poses accurately. To address these challenges, we present VIFHand, the first large-scale dataset for visual-inertial HPE, comprising over 1.4 million synchronized RGB-D and IMU frames from 15 subjects. It includes frame-level 3D joint annotations spanning complex gestures and glove-worn conditions, filling the gap in multimodal data and enabling cross-modal semantic alignment or complementarity. Based on VIFHand, we further propose a multi-modal teacher-student framework for 3D HPE. The teacher model, VIFNet, integrates visual and inertial signals through an efficient cross-modal interaction strategy to achieve high-precision and robust pose estimation. Meanwhile, the student model, KDINet, focuses on sparse IMU input and is trained via cross-modal knowledge distillation, where rich joint representations from VIFNet are transferred to guide the student. This framework offers a unified solution that supports both high-fidelity multimodal fusion and practical deployment under low-density sensor configurations, significantly broadening the applicability of hand pose estimation
+                    systems. Extensive experiments demonstrate its advantages and
+                    potential in multimodal fusion, optically robustness, and sparse
+                    sensing scenarios. The dataset will be publicly released at https:
+                    //github.com/Shirley0118/VIFHand.
+                </p>
+            </div>
+        </section>
+
+        <!-- 方法部分 -->
+        <section id="method" class="py-12 scroll-mt-24 bg-gray-50 rounded-2xl">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Method Overview</h2>
+
+                    
+                
+                <div class="mt-12 bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-center">VIFHand Architecture</h3>
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="" alt="VIFHand Architecture Diagram" class="w-full h-auto object-cover rounded-lg">
+                        <p class="text-gray-700 mt-4 text-sm">Figure 1: Overall framework. The teacher model (VIFNet) takes a monocular RGB image and sparse IMU data as input, extracts
+                            spatial and temporal features, and fuses them via multi-head attention. The fused features are then decoded by the MANO
+                            head to estimate 3D hand pose. The student model (KDINet), trained on IMU data alone, learns to mimic the teacher's fused
+                            representation through knowledge distillation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 结果部分 -->
+        <section id="results" class="py-12 scroll-mt-24">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Results</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-4">填充</h3>
+                            <p class="text-gray-700 mb-4">
+                                填充
+                            <div class="h-80">
+                                <canvas id="benchmarkChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-4">填充</h3>
+                            <p class="text-gray-700 mb-4">
+                                填充
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <img src="" alt="Qualitative Result 1" class="rounded-lg w-full h-auto">
+                                <img src="" alt="Qualitative Result 2" class="rounded-lg w-full h-auto">
+                                <img src="" alt="Qualitative Result 3" class="rounded-lg w-full h-auto">
+                                <img src="" alt="Qualitative Result 4" class="rounded-lg w-full h-auto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-4">填充</h3>
+                        <p class="text-gray-700 mb-4">
+                            填充
+                        </p>
+                        <div class="relative h-96 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <img src="" alt="Qualitative Result 1" class="rounded-lg w-full h-auto">
+                            <div class="absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm rounded-full p-2 shadow-md">
+                                <i class="fa fa-arrows text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- 引用部分 -->
+        <section id="citation" class="py-12 scroll-mt-24">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">Citation</h2>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-4">If you find our work useful, please cite:</h3>
+                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                        <pre class="text-sm font-mono text-gray-700 overflow-x-auto">@inproceedings{Wang2025VIFHand,
+    author    = {Xinyi Wang and Pengfei Ren and Haoyang Zhang and Xin Sheng and Da Li and Liang Xie and Yue Gao and Erwei Yin},
+    title     = {VIFHand: Enhancing Hand Pose Estimation with Visual and Sparse IMU Fusion Benchmark},
+    booktitle = {Proceedings of the 33rd ACM International Conference on Multimedia (MM '25)},
+    year      = {2025},
+    publisher = {ACM},
+    address   = {New York, NY, USA},
+    pages     = {8 pages},
+    doi       = {XXXXXXX.XXXXXXX}
+}</pre>
+                    </div>
+                    <p class="text-gray-700">
+                        This BibTeX entry will cite our ACM MM 2025 paper where VIFHand is introduced and described in detail.
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">Related Works</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <i class="fa fa-file-text-o text-primary"></i>
+                            </div>
+                            <div>
+                                <a href="#" class="font-medium hover:text-primary transition-colors"></a>
+                                <p class="text-gray-600 text-sm"></p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <i class="fa fa-file-text-o text-primary"></i>
+                            </div>
+                            <div>
+                                <a href="#" class="font-medium hover:text-primary transition-colors"></a>
+                                <p class="text-gray-600 text-sm"></p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                <i class="fa fa-file-text-o text-primary"></i>
+                            </div>
+                            <div>
+                                <a href="#" class="font-medium hover:text-primary transition-colors"></a>
+                                <p class="text-gray-600 text-sm"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">VIFHand</h3>
+                    <p class="text-gray-400">
+                        VIFHand: Enhancing Hand Pose Estimation with Visual and
+Sparse IMU Fusion Benchmark
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#abstract" class="text-gray-400 hover:text-white transition-colors">Abstract</a></li>
+                        <li><a href="#method" class="text-gray-400 hover:text-white transition-colors">Method</a></li>
+                        <li><a href="#results" class="text-gray-400 hover:text-white transition-colors">Results</a></li>
+                        <li><a href="#paper" class="text-gray-400 hover:text-white transition-colors">Paper</a></li>
+                        <li><a href="#citation" class="text-gray-400 hover:text-white transition-colors">Citation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope-o text-primary mr-2"></i>
+                            <a href="mailto:georgios@cmu.edu" class="text-gray-400 hover:text-white transition-colors"></a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-map-marker text-primary mr-2"></i>
+                            <span class="text-gray-400"></span>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors">
+                            <i class="fa fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors">
+                            <i class="fa fa-youtube-play"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>© 2025 VIFHand. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-md');
+                navbar.classList.remove('py-3', 'shadow-sm');
+            } else {
+                navbar.classList.add('py-3', 'shadow-sm');
+                navbar.classList.remove('py-2', 'shadow-md');
+            }
+        });
+        
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+        
+
+    </script>
+</body>
+</html>
+    

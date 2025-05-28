@@ -170,10 +170,17 @@
             <div class="max-w-4xl mx-auto">
                 <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Abstract</h2>
                 <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                    Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction and AR/VR applications.However, vision-based approaches often suffer from limited fields of view and occlusions, while methods that rely on sparse inertial measurement units (IMUs) struggle to capture fine-grained hand poses accurately. To address these challenges, we present VIFHand, the first large-scale dataset for visual-inertial HPE, comprising over 1.4 million synchronized RGB-D and IMU frames from 15 subjects. It includes frame-level 3D joint annotations spanning complex gestures and glove-worn conditions, filling the gap in multimodal data and enabling cross-modal semantic alignment or complementarity. Based on VIFHand, we further propose a multi-modal teacher-student framework for 3D HPE. The teacher model, VIFNet, integrates visual and inertial signals through an efficient cross-modal interaction strategy to achieve high-precision and robust pose estimation. Meanwhile, the student model, KDINet, focuses on sparse IMU input and is trained via cross-modal knowledge distillation, where rich joint representations from VIFNet are transferred to guide the student. This framework offers a unified solution that supports both high-fidelity multimodal fusion and practical deployment under low-density sensor configurations, significantly broadening the applicability of hand pose estimation
-                    systems. Extensive experiments demonstrate its advantages and
-                    potential in multimodal fusion, optically robustness, and sparse
-                    sensing scenarios. The dataset will be publicly released at https:
+                    Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction (HCI), augmented reality (AR) and virtual reality (VR) applications. 
+                    However, visual-based approaches often suffer from limited fields of view, occlusions, motion blur and suboptimal lighting. 
+                    Approaches based on inertial measurement units (IMUs) face limitations including susceptibility to magnetic interference, cumulative integration errors, 
+                    and significant drift, which can severely degrade HPE accuracy. To address these challenges, we present VIFHand, the first large-scale glove-worn dataset for visual-inertial HPE, 
+                    comprising over 1.4 million synchronized RGB-D and IMU frames from 15 subjects. It includes frame-level 3D joint annotations spanning complex gestures, 
+                    filling the gap in multimodal data and enabling cross-modal semantic alignment or complementarity. Based on VIFHand, we propose a VIFNet framework, 
+                    which integrates visual and inertial signals through an efficient cross-modal interaction strategy to achieve high-precision and robust pose estimation. 
+                    To further explore the benefits of VIFHand in practical IMU-only configurations, we futher propose VIFNet-S via cross-modal knowledge distillation, 
+                    where rich joint representations from VIFNet are transferred to guide the student. This framework supports both multimodal fusion and practical deployment under IMU-only configurations, 
+                    significantly enhancing the robustness and generalizability of 3D HPE. Extensive experiments demonstrate its advantages and potential in multimodal fusion, optical robustness, 
+                    and IMU-only configurations. The dataset will be publicly released at https:
                     //github.com/Shirley0118/VIFHand.
                 </p>
             </div>

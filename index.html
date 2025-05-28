@@ -70,9 +70,10 @@
             </div>
             <div class="hidden md:flex space-x-8">
                 <a href="#abstract" class="font-medium hover:text-primary transition-colors">Abstract</a>
+                <a href="#dataset" class="font-medium hover:text-primary transition-colors">Dataset</a>
                 <a href="#method" class="font-medium hover:text-primary transition-colors">Method</a>
                 <a href="#results" class="font-medium hover:text-primary transition-colors">Results</a>
-                <a href="#paper" class="font-medium hover:text-primary transition-colors">Paper</a>
+                <!-- <a href="#paper" class="font-medium hover:text-primary transition-colors">Paper</a> -->
                 <a href="#citation" class="font-medium hover:text-primary transition-colors">Citation</a>
             </div>
             <div class="md:hidden">
@@ -87,7 +88,7 @@
                 <a href="#abstract" class="font-medium py-2 hover:text-primary transition-colors">Abstract</a>
                 <a href="#method" class="font-medium py-2 hover:text-primary transition-colors">Method</a>
                 <a href="#results" class="font-medium py-2 hover:text-primary transition-colors">Results</a>
-                <a href="#paper" class="font-medium py-2 hover:text-primary transition-colors">Paper</a>
+                <!-- <a href="#paper" class="font-medium py-2 hover:text-primary transition-colors">Paper</a> -->
                 <a href="#citation" class="font-medium py-2 hover:text-primary transition-colors">Citation</a>
             </div>
         </div>
@@ -144,16 +145,16 @@
                     </a>
                 </div>
                 <div class="flex flex-wrap justify-center gap-4 animate-slide-up" style="animation-delay: 0.4s;">
-                    <a href="#paper" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
+                    <!-- <a href="#paper" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
                         <i class="fa fa-file-pdf-o mr-2"></i> Paper
-                    </a>
-                    <a href="#" class="px-6 py-3 bg-secondary hover:bg-secondary/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
+                    </a> -->
+                    <a href="https://github.com/Shirley0118/VIFHand/tree/main/code" class="px-6 py-3 bg-secondary hover:bg-secondary/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
                         <i class="fa fa-github mr-2"></i> Code
                     </a>
                     <a href="#" class="px-6 py-3 bg-dark hover:bg-dark/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
                         <i class="fa fa-youtube-play mr-2"></i> Video
                     </a>
-                    <a href="#" class="px-6 py-3 bg-white hover:bg-gray-50 text-primary border border-primary rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
+                    <a href="https://pan.quark.cn/s/ef5ca6eedc17" class="px-6 py-3 bg-white hover:bg-gray-50 text-primary border border-primary rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
                         <i class="fa fa-database mr-2"></i> Dataset
                     </a>
                 </div>
@@ -176,6 +177,34 @@
                 </p>
             </div>
         </section>
+<!-- Dataset部分 -->
+<section id="dataset" class="py-12 scroll-mt-24">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Dataset</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- 数据集概览 -->
+            <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
+                <h3 class="text-xl font-semibold mb-4">Dataset Overview</h3>
+                <img src="images/dataset_overview.jpg" alt="Dataset Overview" class="w-full h-auto rounded-lg mb-4">
+                <p class="text-gray-700 text-sm">
+                    Figure 2: 
+                </p>
+            </div>
+
+            <!-- 数据采集设备 -->
+            <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
+                <h3 class="text-xl font-semibold mb-4">Data Collection Setup</h3>
+                <img src="images/data_collection.jpg" alt="Data Collection Setup" class="w-full h-auto rounded-lg mb-4">
+                <p class="text-gray-700 text-sm">
+                    Figure 3:
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+</section>
 
         <!-- 方法部分 -->
         <section id="method" class="py-12 scroll-mt-24 bg-gray-50 rounded-2xl">
@@ -249,7 +278,7 @@
 
 
 
-        <!-- 引用部分 -->
+        <!-- 引用部分
         <section id="citation" class="py-12 scroll-mt-24">
             <div class="max-w-4xl mx-auto">
                 <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">Citation</h2>
@@ -272,7 +301,7 @@
                         This BibTeX entry will cite our ACM MM 2025 paper where VIFHand is introduced and described in detail.
                     </p>
                 </div>
-                
+                 -->
                 <div class="bg-white rounded-xl shadow-lg p-6">
                     <h3 class="text-xl font-semibold mb-4">Related Works</h3>
                     <ul class="space-y-4">
@@ -281,8 +310,8 @@
                                 <i class="fa fa-file-text-o text-primary"></i>
                             </div>
                             <div>
-                                <a href="#" class="font-medium hover:text-primary transition-colors"></a>
-                                <p class="text-gray-600 text-sm"></p>
+                                <a href="#" class="font-medium hover:text-primary transition-colors">A Dual-Branch Self-Boosting Framework for Self-Supervised 3D Hand Pose Estimation</a>
+                                <p class="text-gray-600 text-sm">Pengfei Ren et al.,TIP 2022</p>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -290,8 +319,8 @@
                                 <i class="fa fa-file-text-o text-primary"></i>
                             </div>
                             <div>
-                                <a href="#" class="font-medium hover:text-primary transition-colors"></a>
-                                <p class="text-gray-600 text-sm"></p>
+                                <a href="#" class="font-medium hover:text-primary transition-colors">Mining multi-view information: a strong self-supervised framework for depth-based 3D hand pose and mesh estimation</a>
+                                <p class="text-gray-600 text-sm">Pengfei Ren et al.,CVPR 2022</p>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -299,10 +328,11 @@
                                 <i class="fa fa-file-text-o text-primary"></i>
                             </div>
                             <div>
-                                <a href="#" class="font-medium hover:text-primary transition-colors"></a>
-                                <p class="text-gray-600 text-sm"></p>
+                                <a href="#" class="font-medium hover:text-primary transition-colors">Embodied Hands: Modeling and Capturing Hands and Bodies Together</a>
+                                <p class="text-gray-600 text-sm">Javier Romero et al.,TOG 2017</p>
                             </div>
                         </li>
+                       
                     </ul>
                 </div>
             </div>
@@ -324,9 +354,10 @@ Sparse IMU Fusion Benchmark
                     <h3 class="text-xl font-semibold mb-4">Links</h3>
                     <ul class="space-y-2">
                         <li><a href="#abstract" class="text-gray-400 hover:text-white transition-colors">Abstract</a></li>
+                        <li><a href="#dataset" class="text-gray-400 hover:text-white transition-colors">Dataset</a></li>
                         <li><a href="#method" class="text-gray-400 hover:text-white transition-colors">Method</a></li>
                         <li><a href="#results" class="text-gray-400 hover:text-white transition-colors">Results</a></li>
-                        <li><a href="#paper" class="text-gray-400 hover:text-white transition-colors">Paper</a></li>
+                        <!-- <li><a href="#paper" class="text-gray-400 hover:text-white transition-colors">Paper</a></li> -->
                         <li><a href="#citation" class="text-gray-400 hover:text-white transition-colors">Citation</a></li>
                     </ul>
                 </div>

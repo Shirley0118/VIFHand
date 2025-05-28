@@ -196,7 +196,7 @@
                 <h3 class="text-xl font-semibold mb-4">Dataset Overview</h3>
                 <img src="https://github.com/Shirley0118/VIFHand/blob/main/overview.png" alt="Dataset Overview" class="w-full h-auto rounded-lg mb-4">
                 <p class="text-gray-700 text-sm">
-                    Figure 2: 
+                    Figure 1: 
                 </p>
             </div>
 
@@ -205,7 +205,7 @@
                 <h3 class="text-xl font-semibold mb-4">Data Collection Setup</h3>
                 <img src="https://shirley0118.github.io/VIFHand/capture%20system.png" alt="Data Collection Setup" class="w-full h-auto rounded-lg mb-4">
                 <p class="text-gray-700 text-sm">
-                    Figure 3: Our data capture system consists of a RealSense D435i camera and 6 IMU sensors attached to a glove. The IMUs are placed on the back of the hand and fingertips to capture key motion information.
+                    Figure 2: Our data capture system consists of a RealSense D435i camera and 6 IMU sensors attached to a glove. The IMUs are placed on the back of the hand and fingertips to capture key motion information.
                 </p>
             </div>
         </div>
@@ -225,7 +225,7 @@
                     <h3 class="text-xl font-semibold mb-4 text-center">VIFHand Architecture</h3>
                     <div class="overflow-hidden rounded-lg">
                         <img src="https://github.com/Shirley0118/VIFHand/blob/main/pipeline.png" alt="VIFHand Architecture Diagram" class="w-full h-auto object-cover rounded-lg">
-                        <p class="text-gray-700 mt-4 text-sm">Figure 1: Overall framework. The teacher model (VIFNet) takes a monocular RGB image and sparse IMU data as input, extracts
+                        <p class="text-gray-700 mt-4 text-sm">Figure 3: Overall framework. The teacher model (VIFNet) takes a monocular RGB image and sparse IMU data as input, extracts
                             spatial and temporal features, and fuses them via multi-head attention. The fused features are then decoded by the MANO
                             head to estimate 3D hand pose. The student model (KDINet), trained on IMU data alone, learns to mimic the teacher's fused
                             representation through knowledge distillation.</p>

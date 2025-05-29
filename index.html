@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIFHand: Enhancing Hand Pose Estimation with Visual-Inertial Benchmark</title>
+    <title>VIHand: Enhancing Hand Pose Estimation with Visual-Inertial Benchmark</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#165DFF',
-                        secondary: '#FF7D00',
-                        dark: '#1E293B',
-                        light: '#F8FAFC'
+                        primary: '#165DFF',        // 主色调：深蓝色
+                        secondary: '#3B82F6',      // 辅助色：浅蓝色
+                        accent: '#F97316',         // 强调色：橙色
+                        dark: '#1E293B',           // 深色：深灰
+                        light: '#F8FAFC',          // 浅色：接近白色
+                        neutral: '#64748B',        // 中性色：中灰
                     },
                     fontFamily: {
                         inter: ['Inter', 'sans-serif'],
@@ -28,7 +30,7 @@
             }
         }
     </script>
-    
+
     <style type="text/tailwindcss">
         @layer utilities {
             .content-auto {
@@ -49,6 +51,9 @@
             .animate-slide-up {
                 animation: slideUp 0.8s ease-out;
             }
+            .pill-button {
+                @apply px-6 py-2.5 bg-dark hover:bg-accent text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center text-sm;
+            }
             @keyframes fadeIn {
                 from { opacity: 0; }
                 to { opacity: 1; }
@@ -65,20 +70,19 @@
     <nav id="navbar" class="fixed w-full bg-white/90 backdrop-blur-md z-50 transition-all duration-300 shadow-sm">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <span class="text-primary text-2xl"><i class="fa fa-cube"></i></span>
-                <span class="font-bold text-xl text-primary">VIFHand</span>
+                <span class="text-2xl"><i class="fa fa-cube text-primary"></i></span>
+                <span class="font-bold text-xl text-primary">VIHand</span>
             </div>
             <div class="hidden md:flex space-x-8">
                 <a href="#abstract" class="font-medium hover:text-primary transition-colors">Abstract</a>
                 <a href="#dataset" class="font-medium hover:text-primary transition-colors">Dataset</a>
                 <a href="#method" class="font-medium hover:text-primary transition-colors">Method</a>
                 <a href="#results" class="font-medium hover:text-primary transition-colors">Results</a>
-                <!-- <a href="#paper" class="font-medium hover:text-primary transition-colors">Paper</a> -->
                 <a href="#citation" class="font-medium hover:text-primary transition-colors">Citation</a>
             </div>
             <div class="md:hidden">
                 <button id="menu-toggle" class="text-dark focus:outline-none">
-                    <i class="fa fa-bars text-xl"></i>
+                    <i class="fa fa-bars text-primary text-xl"></i>
                 </button>
             </div>
         </div>
@@ -86,10 +90,9 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg animate-fade-in">
             <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
                 <a href="#abstract" class="font-medium py-2 hover:text-primary transition-colors">Abstract</a>
-                <a href="#dataset" class="font-medium hover:text-primary transition-colors">Dataset</a>
+                <a href="#dataset" class="font-medium py-2 hover:text-primary transition-colors">Dataset</a>
                 <a href="#method" class="font-medium py-2 hover:text-primary transition-colors">Method</a>
                 <a href="#results" class="font-medium py-2 hover:text-primary transition-colors">Results</a>
-                <!-- <a href="#paper" class="font-medium py-2 hover:text-primary transition-colors">Paper</a> -->
                 <a href="#citation" class="font-medium py-2 hover:text-primary transition-colors">Citation</a>
             </div>
         </div>
@@ -100,100 +103,97 @@
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center">
                 <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark mb-6 animate-fade-in">
-                    VIFHand: Enhancing 3D Hand Pose Estimation with Visual-Inertial Benchmark
+                    VIHand: Enhancing 3D Hand Pose Estimation with Visual-Inertial Benchmark
                 </h1>
                 <p class="text-[clamp(1.1rem,2vw,1.3rem)] text-gray-600 mb-8 animate-slide-up">
-                    
+
                 </p>
-<table align=center width=700px>
-    <tr>
-        <center>
-            <span style="font-size:20px">Xinyi Wang<sup>1</sup></span> &nbsp;&nbsp;&nbsp;
-            <span style="font-size:20px">Pengfei Ren<sup>2</sup></span> &nbsp;&nbsp;&nbsp;
-            <span style="font-size:20px">Haoyang Zhang<sup>3</sup></span> &nbsp;&nbsp;&nbsp;
-            <span style="font-size:20px">Xin Sheng<sup>4</sup></span> &nbsp;&nbsp;&nbsp;
-            <span style="font-size:20px">Da Li<sup>5</sup></span> &nbsp;&nbsp;&nbsp;
-            <span style="font-size:20px">Liang Xie<sup>3</sup></span> &nbsp;&nbsp;&nbsp;
-            <span style="font-size:20px">Yue Gao<sup>1</sup></span> &nbsp;&nbsp;&nbsp;
-            <span style="font-size:20px">Erwei Yin<sup>3</sup></span>
-        </center>
-    </tr>
-</table>
+                <table align=center width=700px>
+                    <tr>
+                        <center>
+                            <span style="font-size:20px">Xinyi Wang<sup>1</sup></span> &nbsp;&nbsp;&nbsp;
+                            <span style="font-size:20px">Pengfei Ren<sup>2</sup></span> &nbsp;&nbsp;&nbsp;
+                            <span style="font-size:20px">Haoyang Zhang<sup>3</sup></span> &nbsp;&nbsp;&nbsp;
+                            <span style="font-size:20px">Xin Sheng<sup>4</sup></span> &nbsp;
+                            <span style="font-size:20px">Da Li<sup>5</sup></span> &nbsp;&nbsp;&nbsp;
+                            <span style="font-size:20px">Liang Xie<sup>3</sup></span> &nbsp;&nbsp;&nbsp;
+                            <span style="font-size:20px">Yue Gao<sup>1</sup></span> &nbsp;
+                            <span style="font-size:20px">Erwei Yin<sup>1, 3</sup></span>
+                        </center>
+                    </tr>
+                </table>
 
-<table align=center width=700px>
-    <tr>
-        <td align=center width=100px>
-            <center>
-                <span style="font-size:20px"><sup>1</sup>Shanghai Jiao Tong University</span> &nbsp;
-                <span style="font-size:20px"><sup>2</sup>Beijing University of Posts and Telecommunications</span> &nbsp;
-                <span style="font-size:20px"><sup>3</sup>Defense Innovation Institute, Academy of Military Sciences</span> &nbsp;
-                <span style="font-size:20px"><sup>4</sup>Tianjin University</span> &nbsp;
-                <span style="font-size:20px"><sup>5</sup>Nankai University</span>
-            </center>
-        </td>
-    </tr>
-</table>
+                <table align=center width=700px>
+                    <tr>
+                        <td align=center width=100px>
+                            <center>
+                                <span style="font-size:20px"><sup>1</sup>Shanghai Jiao Tong University</span> &nbsp;
+                                <span style="font-size:20px"><sup>2</sup>Beijing University of Posts and Telecommunications</span> &nbsp;
+                                <span style="font-size:20px"><sup>3</sup>Defense Innovation Institute, Academy of Military Sciences</span> &nbsp;
+                                <span style="font-size:20px"><sup>4</sup>Tianjin University</span> &nbsp;
+                                <span style="font-size:20px"><sup>5</sup>Nankai University</span>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
 
-<table align=center width=700px>
-    <tr>
-        <td align=center width=100px>
-            <center>
-                <span style="font-size:20px">ACM MM 2025</span>
-            </center>
-        </td>
-
-    </tr>
-</table>
-<br>
-<br>
+                <br>
                 <div class="flex flex-wrap justify-center gap-4 animate-slide-up" style="animation-delay: 0.4s;">
-                    <!-- <a href="#paper" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
-                        <i class="fa fa-file-pdf-o mr-2"></i> Paper
-                    </a> -->
-                    <a href="https://github.com/Shirley0118/VIFHand/tree/main/code" class="px-6 py-3 bg-secondary hover:bg-secondary/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
-                        <i class="fa fa-github mr-2"></i> Code
+                    <!-- 调整后的按钮样式：尺寸更小，颜色优化 -->
+                    <a href="https://github.com/Shirley0118/VIHand/tree/main/code" class="pill-button">
+                        <i class="fa fa-github text-white mr-2"></i> Code
                     </a>
-                    <!-- <a href="#" class="px-6 py-3 bg-dark hover:bg-dark/90 text-white rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
-                        <i class="fa fa-youtube-play mr-2"></i> Video
-                    </a> -->
-                    <a href="https://pan.quark.cn/s/ef5ca6eedc17" class="px-6 py-3 bg-white hover:bg-gray-50 text-primary border border-primary rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
-                        <i class="fa fa-database mr-2"></i> Dataset
+                    <a href="https://pan.quark.cn/s/ef5ca6eedc17" class="pill-button">
+                        <i class="fa fa-database text-white mr-2"></i> Dataset
                     </a>
-                    <a href="https://github.com/Shirley0118/VIFHand/blob/main/%E8%A1%A5%E5%85%85%E6%9D%90%E6%96%99.pdf" class="px-6 py-3 bg-white hover:bg-gray-50 text-primary border border-primary rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center">
-                        <i class="fa fa-database mr-2"></i> Supplementary materials
+                    <a href="https://github.com/Shirley0118/VIHand/blob/main/%E8%A1%A5%E5%85%85%E6%9D%90%E6%96%99.pdf" class="pill-button">
+                        <i class="fa fa-file-pdf-o text-white mr-2"></i> Supplementary materials
                     </a>
                 </div>
+
+                <!-- 调整图片与上方内容的间距 -->
+                <img src="https://shirley0118.github.io/VIHand/overview.png" alt="Dataset Overview" class="w-auto h-auto rounded-lg mt-8 mx-auto">
+
+                <!-- 新增：图片下方的两端对齐文字 -->
+                <p class="mt-6 text-gray-700 text-justify leading-relaxed animate-fade-in" style="animation-delay: 0.6s;">
+                    VIHand is the first large-scale glove-worn dataset for visual-inertial hand pose estimation,
+                    containing over 1.4 million synchronized RGB-D and IMU frames from 15 subjects.
+                    It provides frame-level 3D joint annotations across complex hand gestures,
+                    enabling cross-modal semantic alignment and complementarity for advanced hand pose estimation research.
+                </p>
             </div>
         </div>
     </header>
 
-
     <!-- 主要内容 -->
     <!-- 主容器 -->
+<!--        <main class="container mx-auto px-4 py-12">-->
+<!--                <img src="https://shirley0118.github.io/VIHand/overview.png" alt="Dataset Overview" class="w-9/10 h-auto rounded-lg mt-8 mx-auto">-->
 
-    <main class="container mx-auto px-4 py-12">
-        <main class="container mx-auto px-4 py-12">
-            <div class="bg-white rounded-xl shadow-lg p-6 hover-scale max-w-5xl mx-auto">
-               
-                <img src="https://shirley0118.github.io/VIFHand/overview.png" alt="Dataset Overview" class="w-9/10 h-auto rounded-lg mb-4 mx-auto">
-           
-            </div>
+<!--                <div class="bg-white rounded-xl shadow-lg p-6 hover-scale max-w-5xl mx-auto">&ndash;&gt;-->
+<!--                <p class="mt-6 text-gray-700 text-justify leading-relaxed animate-fade-in" style="animation-delay: 0.6s;">-->
+<!--                    VIHand is the first large-scale glove-worn dataset for visual-inertial hand pose estimation,-->
+<!--                    containing over 1.4 million synchronized RGB-D and IMU frames from 15 subjects.-->
+<!--                    It provides frame-level 3D joint annotations across complex hand gestures,-->
+<!--                    enabling cross-modal semantic alignment and complementarity for advanced hand pose estimation research.-->
+<!--                </p>-->
+<!--            </div>-->
             <!-- <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
 // ... existing code ...
-    <!-- <main class="container mx-auto px-4 py-12">
+     <main class="container mx-auto px-4 py-12">
 
         <main class="container mx-auto px-4 py-12">
 
             <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
 
-                <img src="https://shirley0118.github.io/VIFHand/overview.png" 
-                     alt="Dataset Overview" 
+                <img src="https://shirley0118.github.io/VIHand/overview.png"
+                     alt="Dataset Overview"
                      class="w-3 h-auto rounded-lg mb-4 mx-auto">
             </div> -->
             <!-- <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
-               
-                <img src="https://shirley0118.github.io/VIFHand/overview.png" alt="Dataset Overview" class="w-full h-auto rounded-lg mb-4">
-           
+
+                <img src="https://shirley0118.github.io/VIHand/overview.png" alt="Dataset Overview" class="w-full h-auto rounded-lg mb-4">
+
             </div> -->
             <!-- 摘要部分 -->
             <section id="abstract" class="py-12 scroll-mt-24">
@@ -203,14 +203,14 @@
                         Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction (HCI), augmented reality (AR) and virtual reality (VR) applications.
                         However, visual-based approaches often suffer from limited fields of view, occlusions, motion blur and suboptimal lighting.
                         Approaches based on inertial measurement units (IMUs) face limitations including susceptibility to magnetic interference, cumulative integration errors,
-                        and significant drift, which can severely degrade HPE accuracy. To address these challenges, we present VIFHand, the first large-scale glove-worn dataset for visual-inertial HPE,
+                        and significant drift, which can severely degrade HPE accuracy. To address these challenges, we present VIHand, the first large-scale glove-worn dataset for visual-inertial HPE,
                         comprising over 1.4 million synchronized RGB-D and IMU frames from 15 subjects. It includes frame-level 3D joint annotations spanning complex gestures,
-                        filling the gap in multimodal data and enabling cross-modal semantic alignment or complementarity. Based on VIFHand, we propose a VIFNet framework,
+                        filling the gap in multimodal data and enabling cross-modal semantic alignment or complementarity. Based on VIHand, we propose a VIFNet framework,
                         which integrates visual and inertial signals through an efficient cross-modal interaction strategy to achieve high-precision and robust pose estimation.
-                        To further explore the benefits of VIFHand in practical IMU-only configurations, we futher propose VIFNet-S via cross-modal knowledge distillation,
+                        To further explore the benefits of VIHand in practical IMU-only configurations, we futher propose VIFNet-S via cross-modal knowledge distillation,
                         where rich joint representations from VIFNet are transferred to guide the student. This framework supports both multimodal fusion and practical deployment under IMU-only configurations,
                         significantly enhancing the robustness and generalizability of 3D HPE. Extensive experiments demonstrate its advantages and potential in multimodal fusion, optical robustness,
-                        and IMU-only configurations. The dataset will be publicly released at https://github.com/Shirley0118/VIFHand.
+                        and IMU-only configurations. The dataset will be publicly released at https://github.com/Shirley0118/VIHand.
                     </p>
                 </div>
             </section>
@@ -225,19 +225,19 @@
             <!-- 方法部分 -->
         <section id="method" class="py-12 scroll-mt-24 bg-gray-50 rounded-2xl">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Method Overview</h2>
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Method</h2>
 
-                    
-                
+
+
                 <div class="mt-12 bg-white rounded-xl shadow-lg p-6">
-                    
+
                     <p class="text-gray-700 mb-4 text-sm text-justify">Overall framework. The teacher model (VIFNet) takes a monocular RGB image and sparse IMU data as input, extracts
                         spatial and temporal features, and fuses them via multi-head attention. The fused features are then decoded by the MANO
                         head to estimate 3D hand pose. The student model (KDINet), trained on IMU data alone, learns to mimic the teacher's fused
                         representation through knowledge distillation.</p>
 
                     <div class="overflow-hidden rounded-lg">
-                        <img src="https://shirley0118.github.io/VIFHand/pipeline.png" alt="VIFHand Architecture Diagram" class="w-full h-auto object-cover rounded-lg">
+                        <img src="https://shirley0118.github.io/VIHand/pipeline.png" alt="VIHand Architecture Diagram" class="w-full h-auto object-cover rounded-lg">
                     </div>
                 </div>
             </div>
@@ -247,13 +247,13 @@
         <section id="results" class="py-12 scroll-mt-24">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Results</h2>
-                
+
                 <div class="grid grid-cols-1 gap-6 mb-10">
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold mb-4">填充</h3>
                             <p class="text-gray-700 mb-4">
-                                <img src="https://shirley0118.github.io/VIFHand/wilor.png" alt="Qualitative Result 1" class="rounded-lg w-full h-auto">
+                                <img src="https://shirley0118.github.io/VIHand/wilor.png" alt="Qualitative Result 1" class="rounded-lg w-full h-auto">
                             </p>
                             <div class="h-80">
                                 <canvas id="benchmarkChart"></canvas>
@@ -261,7 +261,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </section>
 
@@ -291,7 +291,7 @@
             │   │...
                         </pre>
                     </div>
-                
+
                     <div class="note mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
                         <p class="text-sm">
                             Note: The above directory structure is a representation of how the dataset is organized. Each directory and file serves a specific purpose in the dataset's organization.
@@ -301,7 +301,7 @@
             </section>
 
 
-            
+
 
 
             <!DOCTYPE html>
@@ -309,7 +309,7 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>VIFHand Dataset Documentation</title>
+                <title>VIHand Dataset Documentation</title>
                 <script src="https://cdn.tailwindcss.com"></script>
                 <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
                 <script>
@@ -374,17 +374,17 @@
                 <main class="max-w-6xl mx-auto px-4 py-12">
                     <!-- Frame Distribution Table -->
                     <section class="animate-fade-in mb-12" style="animation-delay: 0.3s">
-               
+
                         <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Detailed Breakdown</h2>
-            
+
                         <!-- 修改为英文文本 -->
                         <p class="text-base font-medium mb-4 text-gray-700 max-w-2xl mx-auto">In our experiment, the dataset is divided as follows:</p>
-            
+
                         <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-2xl mx-auto"> <!-- 进一步限制最大宽度 -->
                             <div class="p-6 border-b border-gray-200">
                                 <h3 class="text-xl font-bold">Frame Distribution by Category</h3>
                             </div>
-            
+
                             <div class="overflow-x-auto">
                                 <table class="w-full table-fixed-layout">
                                     <thead>
@@ -431,7 +431,7 @@
                             </div>
                         </div>
                     </section>
-            
+
                     <!-- Subject Information Section with Introduction -->
                     <section class="animate-fade-in mt-8" style="animation-delay: 0.5s">
                         <p class="text-lg font-medium mb-6 text-gray-800 max-w-2xl mx-auto">
@@ -440,12 +440,12 @@
                             collection of hand interaction data, which forms the basis for training and evaluating
                             hand pose estimation models.
                         </p>
-            
+
                         <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-2xl mx-auto"> <!-- 进一步限制最大宽度 -->
                             <div class="p-6 border-b border-gray-200"> <!-- 恢复分隔线 -->
                                 <h3 class="text-xl font-bold">Subject Information</h3> <!-- 恢复标题 -->
                             </div>
-            
+
                             <div class="overflow-x-auto">
                                 <table class="w-full table-fixed-layout">
                                     <thead>
@@ -462,7 +462,7 @@
                         </div>
                     </section>
                 </main>
-            
+
                 <script>
                     // Smooth scrolling
                     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -473,7 +473,7 @@
                             });
                         });
                     });
-            
+
                     // Card hover effects
                     document.querySelectorAll('.data-card').forEach(card => {
                         card.addEventListener('mouseenter', () => {
@@ -483,7 +483,7 @@
                             card.style.transform = 'translateY(0)';
                         });
                     });
-            
+
                     // Generate subject table content
                     document.addEventListener('DOMContentLoaded', () => {
                         const table = document.getElementById('subjectTable');
@@ -506,15 +506,15 @@
                             { id: 'subject15', gender: 'Female' },
                             { id: 'subject16', gender: 'Female' }
                         ];
-            
+
                         subjects.forEach(subject => {
                             const row = document.createElement('tr');
                             row.className = subject.gender === 'Male' ? 'subject-male' : 'subject-female';
-            
+
                             const idCell = document.createElement('td');
                             idCell.className = 'table-cell-padding whitespace-nowrap overflow-hidden text-ellipsis';
                             idCell.innerHTML = `<div class="text-xs font-bold">${subject.id}</div>`;
-            
+
                             const genderCell = document.createElement('td');
                             genderCell.className = 'table-cell-padding whitespace-nowrap';
                             genderCell.innerHTML = `
@@ -523,7 +523,7 @@
                                     <span class="text-xs font-medium">${subject.gender}</span>
                                 </div>
                             `;
-            
+
                             row.appendChild(idCell);
                             row.appendChild(genderCell);
                             table.appendChild(row);
@@ -536,13 +536,13 @@
         <section id="citation" class="py-12 scroll-mt-24">
             <div class="max-w-4xl mx-auto">
                 <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">Citation</h2>
-                
+
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
                     <h3 class="text-xl font-semibold mb-4">If you find our work useful, please cite:</h3>
                     <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                        <pre class="text-sm font-mono text-gray-700 overflow-x-auto">@inproceedings{Wang2025VIFHand,
+                        <pre class="text-sm font-mono text-gray-700 overflow-x-auto">@inproceedings{Wang2025VIHand,
     author    = {Xinyi Wang and Pengfei Ren and Haoyang Zhang and Xin Sheng and Da Li and Liang Xie and Yue Gao and Erwei Yin},
-    title     = {VIFHand: Enhancing Hand Pose Estimation with Visual and Sparse IMU Fusion Benchmark},
+    title     = {VIHand: Enhancing Hand Pose Estimation with Visual and Sparse IMU Fusion Benchmark},
     booktitle = {Proceedings of the 33rd ACM International Conference on Multimedia (MM '25)},
     year      = {2025},
     publisher = {ACM},
@@ -552,7 +552,7 @@
 }</pre>
                     </div>
                     <p class="text-gray-700">
-                        This BibTeX entry will cite our ACM MM 2025 paper where VIFHand is introduced and described in detail.
+                        This BibTeX entry will cite our ACM MM 2025 paper where VIHand is introduced and described in detail.
                     </p>
                 </div>
                  -->
@@ -586,7 +586,7 @@
                                 <p class="text-gray-600 text-sm">Javier Romero et al.,TOG 2017</p>
                             </div>
                         </li>
-                       
+
                     </ul>
                 </div>
             </div>
@@ -594,7 +594,7 @@
     </main>
 
 
-    
+
 </script>
 </body>
 </html>
@@ -610,15 +610,15 @@
             </p>
         </div>
     </section>
-    
+
     <!-- 底部
     <footer class="bg-dark text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">VIFHand</h3>
+                    <h3 class="text-xl font-semibold mb-4">VIHand</h3>
                     <p class="text-gray-400">
-                       VIFHand: Enhancing 3D Hand Pose Estimation with Visual-Inertial Benchmark
+                       VIHand: Enhancing 3D Hand Pose Estimation with Visual-Inertial Benchmark
                     </p>
                 </div>
                 <div>
@@ -658,7 +658,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
-                <p>© 2025 VIFHand. All rights reserved.</p>
+                <p>© 2025 VIHand. All rights reserved.</p>
             </div>
         </div>
     </footer> --> -->
@@ -675,30 +675,30 @@
                 navbar.classList.remove('py-2', 'shadow-md');
             }
         });
-        
+
         // 移动端菜单切换
         document.getElementById('menu-toggle').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
         });
-        
+
         // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
-                
+
                 if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
+
                     // 关闭移动端菜单
                     document.getElementById('mobile-menu').classList.add('hidden');
                 }
             });
         });
-        
+

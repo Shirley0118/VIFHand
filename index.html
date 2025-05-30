@@ -101,7 +101,7 @@
     <!-- 英雄区域 -->
     <header class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-primary/5 to-light">
         <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center">
+            <div class="max-w-7xl mx-auto text-center">
                 <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark mb-6 animate-fade-in">
                     VIHand: Enhancing 3D Hand Pose Estimation with Visual-Inertial Benchmark
                 </h1>
@@ -146,58 +146,29 @@
                     <a href="https://pan.quark.cn/s/ef5ca6eedc17" class="pill-button">
                         <i class="fa fa-database text-white mr-2"></i> Dataset
                     </a>
-                    <a href="https://github.com/Shirley0118/VIHand/blob/main/%E8%A1%A5%E5%85%85%E6%9D%90%E6%96%99.pdf" class="pill-button">
+                    <a href="https://shirley0118.github.io/VIHand/SupplementaryMaterials.pdf" class="pill-button">
                         <i class="fa fa-file-pdf-o text-white mr-2"></i> Supplementary materials
                     </a>
                 </div>
 
                 <!-- 调整图片与上方内容的间距 -->
-                <img src="https://shirley0118.github.io/VIHand/overview.png" alt="Dataset Overview" class="w-auto h-auto rounded-lg mt-8 mx-auto">
+                <div style="width: 90%; margin-left: 5%;">
+                    <img src="https://shirley0118.github.io/VIHand/overview.jpg" alt="Dataset Overview" class="w-full h-auto rounded-lg mt-8">
 
-                <!-- 新增：图片下方的两端对齐文字 -->
-                <p class="mt-6 text-gray-700 text-justify leading-relaxed animate-fade-in" style="animation-delay: 0.6s;">
-                    VIHand is the first large-scale glove-worn dataset for visual-inertial hand pose estimation,
-                    containing over 1.4 million synchronized RGB-D and IMU frames from 15 subjects.
-                    It provides frame-level 3D joint annotations across complex hand gestures,
-                    enabling cross-modal semantic alignment and complementarity for advanced hand pose estimation research.
-                </p>
+                    <!-- 新增：图片下方的两端对齐文字 -->
+                    <p class="mt-6 text-lg text-gray-700 text-justify leading-relaxed animate-fade-in" style="animation-delay: 0.6s;">
+                        VIHand is the first large-scale glove-worn dataset for visual-inertial hand pose estimation,
+                        containing over 1.4 million synchronized RGB-D and IMU frames from 15 subjects.
+                        It provides frame-level 3D joint annotations across complex hand gestures,
+                        enabling cross-modal semantic alignment and complementarity for advanced hand pose estimation research.
+                    </p>
+                </div>
             </div>
         </div>
     </header>
-
-    <!-- 主要内容 -->
-    <!-- 主容器 -->
-<!--        <main class="container mx-auto px-4 py-12">-->
-<!--                <img src="https://shirley0118.github.io/VIHand/overview.png" alt="Dataset Overview" class="w-9/10 h-auto rounded-lg mt-8 mx-auto">-->
-
-<!--                <div class="bg-white rounded-xl shadow-lg p-6 hover-scale max-w-5xl mx-auto">&ndash;&gt;-->
-<!--                <p class="mt-6 text-gray-700 text-justify leading-relaxed animate-fade-in" style="animation-delay: 0.6s;">-->
-<!--                    VIHand is the first large-scale glove-worn dataset for visual-inertial hand pose estimation,-->
-<!--                    containing over 1.4 million synchronized RGB-D and IMU frames from 15 subjects.-->
-<!--                    It provides frame-level 3D joint annotations across complex hand gestures,-->
-<!--                    enabling cross-modal semantic alignment and complementarity for advanced hand pose estimation research.-->
-<!--                </p>-->
-<!--            </div>-->
-            <!-- <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
-// ... existing code ...
-     <main class="container mx-auto px-4 py-12">
-
-        <main class="container mx-auto px-4 py-12">
-
-            <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
-
-                <img src="https://shirley0118.github.io/VIHand/overview.png"
-                     alt="Dataset Overview"
-                     class="w-3 h-auto rounded-lg mb-4 mx-auto">
-            </div> -->
-            <!-- <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
-
-                <img src="https://shirley0118.github.io/VIHand/overview.png" alt="Dataset Overview" class="w-full h-auto rounded-lg mb-4">
-
-            </div> -->
             <!-- 摘要部分 -->
             <section id="abstract" class="py-12 scroll-mt-24">
-                <div class="max-w-4xl mx-auto">
+                <div class="max-w-6xl mx-auto">
                     <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Abstract</h2>
                     <p class="text-lg text-gray-700 leading-relaxed mb-6 text-justify">
                         Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction (HCI), augmented reality (AR) and virtual reality (VR) applications.
@@ -273,22 +244,26 @@
                         <pre class="text-sm font-mono leading-relaxed">
             ${ROOT}
             ├── multidata
-            │   ├── subject0/ ~ subject15         # 16 subjects
-            │   │   ├── ROM01/ ~ ROM15            # 15 gesture sequences
+            │   ├── subject0 ~ subject15           # 16 subjects
+            │   │   ├── ROM01 ~ ROM15              # 15 gesture sequences
             │   │   │   ├── camera0 ~ camera4      # 5 camera views
             │   │   │   │   ├── rgb                # RGB sequences
             │   │   │   │   ├── depth              # Depth map sequences
             │   │   │   │   ├── bbox.json          # bounding box
             │   │   │   │   └── center.json        # Depth map center
-            │   │   │   └── IMU.json               # IMU sequences
+            │   │   │   │── IMU.json               # IMU sequences
+            │   │   │   └── camera_paras.json      # camera parameters
             │   │   │...
             │   │...
             ├── annotations
             │   ├── subject0 ~ subject15
-            │   │   ├── joint.json
-            │   │   ├── mano.json
-            │   │   └── mesh.json
+            │   │   ├── ROM01 ~ ROM15
+            │   │   │   ├── joint.json
+            │   │   │   ├── mano.json
+            │   │   │   └── mesh.json
+            │   │   │...
             │   │...
+
                         </pre>
                     </div>
 
@@ -303,34 +278,6 @@
 
 
 
-
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>VIHand Dataset Documentation</title>
-                <script src="https://cdn.tailwindcss.com"></script>
-                <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-                <script>
-                    tailwind.config = {
-                        theme: {
-                            extend: {
-                                colors: {
-                                    primary: '#165DFF',
-                                    secondary: '#36BFFA',
-                                    neutral: '#F5F7FA',
-                                    dark: '#1D2939',
-                                    male: '#3B82F6',
-                                    female: '#EC4899'
-                                },
-                                fontFamily: {
-                                    inter: ['Inter', 'sans-serif'],
-                                },
-                            }
-                        }
-                    }
-                </script>
                 <style type="text/tailwindcss">
                     @layer utilities {
                         .content-auto {
@@ -348,17 +295,17 @@
                         .animate-fade-in {
                             animation: fadeIn 0.5s ease-in-out;
                         }
-                        .subject-male {
-                            @apply bg-blue-50 text-blue-800 border-l-4 border-blue-500;
+                        .female-row {
+                            @apply bg-pink-100 hover:bg-pink-200 transition-colors duration-200;
                         }
-                        .subject-female {
-                            @apply bg-pink-50 text-pink-800 border-l-4 border-pink-500;
+                        .male-row {
+                            @apply bg-blue-100 hover:bg-blue-200 transition-colors duration-200;
                         }
                         .table-fixed-layout {
                             table-layout: fixed;
                         }
                         .table-cell-padding {
-                            padding: 0.25rem 0.5rem; /* 减少内边距 */
+                            padding: 0.25rem 0.5rem;
                         }
                         .table-header {
                             @apply text-xs font-medium text-gray-500 uppercase tracking-wider;
@@ -509,18 +456,18 @@
 
                         subjects.forEach(subject => {
                             const row = document.createElement('tr');
-                            row.className = subject.gender === 'Male' ? 'subject-male' : 'subject-female';
+                            row.className = subject.gender === 'Female' ? 'female-row' : 'male-row';
 
                             const idCell = document.createElement('td');
                             idCell.className = 'table-cell-padding whitespace-nowrap overflow-hidden text-ellipsis';
-                            idCell.innerHTML = `<div class="text-xs font-bold">${subject.id}</div>`;
+                            idCell.innerHTML = `<div class="text-xs font-bold ${subject.gender === 'Female' ? 'text-pink-900' : 'text-blue-900'}">${subject.id}</div>`;
 
                             const genderCell = document.createElement('td');
                             genderCell.className = 'table-cell-padding whitespace-nowrap';
                             genderCell.innerHTML = `
                                 <div class="flex items-center">
-                                    <span class="w-2.5 h-2.5 rounded-full mr-1.5 ${subject.gender === 'Male' ? 'bg-blue-500' : 'bg-pink-500'}"></span>
-                                    <span class="text-xs font-medium">${subject.gender}</span>
+                                    <span class="w-2.5 h-2.5 rounded-full mr-1.5 ${subject.gender === 'Female' ? 'bg-pink-600' : 'bg-blue-600'}"></span>
+                                    <span class="text-xs font-medium ${subject.gender === 'Female' ? 'text-pink-900' : 'text-blue-900'}">${subject.gender}</span>
                                 </div>
                             `;
 
@@ -556,7 +503,7 @@
                     </p>
                 </div>
                  -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 max-w-6xl mx-auto">
                     <h3 class="text-xl font-semibold mb-4">Related Works</h3>
                     <ul class="space-y-4">
                         <li class="flex items-start">

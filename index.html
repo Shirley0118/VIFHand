@@ -62,6 +62,14 @@
                 from { transform: translateY(20px); opacity: 0; }
                 to { transform: translateY(0); opacity: 1; }
             }
+            /* 新增表格单元格内边距样式 */
+            .table-cell-padding {
+                @apply px-4 py-2.5;  /* 调整内边距减少行高 */
+            }
+            /* 表格行高调整 */
+            .table-row-height {
+                height: 50%;  /* 原高度的75% */
+            }
         }
     </style>
 </head>
@@ -76,7 +84,7 @@
             <div class="hidden md:flex space-x-8">
                 <a href="#abstract" class="font-medium hover:text-primary transition-colors">Abstract</a>
                 <a href="#dataset" class="font-medium hover:text-primary transition-colors">Dataset</a>
-                <a href="#method" class="font-medium hover:text-primary transition-colors">Method</a>
+                <a href="#method" class="font-medium hover:text-primary transition-colors">Benchmark</a>
                 <a href="#results" class="font-medium hover:text-primary transition-colors">Results</a>
                 <a href="#citation" class="font-medium hover:text-primary transition-colors">Citation</a>
             </div>
@@ -91,7 +99,7 @@
             <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
                 <a href="#abstract" class="font-medium py-2 hover:text-primary transition-colors">Abstract</a>
                 <a href="#dataset" class="font-medium py-2 hover:text-primary transition-colors">Dataset</a>
-                <a href="#method" class="font-medium py-2 hover:text-primary transition-colors">Method</a>
+                <a href="#method" class="font-medium py-2 hover:text-primary transition-colors">Benchmark</a>
                 <a href="#results" class="font-medium py-2 hover:text-primary transition-colors">Results</a>
                 <a href="#citation" class="font-medium py-2 hover:text-primary transition-colors">Citation</a>
             </div>
@@ -139,7 +147,6 @@
 
                 <br>
                 <div class="flex flex-wrap justify-center gap-4 animate-slide-up" style="animation-delay: 0.4s;">
-                    <!-- 调整后的按钮样式：尺寸更小，颜色优化 -->
                     <a href="https://github.com/Shirley0118/VIHand/tree/main/code" class="pill-button">
                         <i class="fa fa-github text-white mr-2"></i> Code
                     </a>
@@ -149,13 +156,25 @@
                     <a href="https://shirley0118.github.io/VIHand/SupplementaryMaterials.pdf" class="pill-button">
                         <i class="fa fa-file-pdf-o text-white mr-2"></i> Supplementary materials
                     </a>
-                </div>
 
-                <!-- 调整图片与上方内容的间距 -->
+                </div>
+                <br>
+                <br>
+<div class="video-container mt-8 animate-fade-in" style="width: 90%; margin: 0 auto;">
+    <video
+        controls
+        autoplay
+        loop
+        muted
+        class="w-full rounded-lg shadow-lg"
+        style="max-width: 100%; height: auto;">
+        <source src="https://shirley0118.github.io/VIHand/demo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
                 <div style="width: 90%; margin-left: 5%;">
                     <img src="https://shirley0118.github.io/VIHand/overview.jpg" alt="Dataset Overview" class="w-full h-auto rounded-lg mt-8">
-
-                    <!-- 新增：图片下方的两端对齐文字 -->
                     <p class="mt-6 text-lg text-gray-700 text-justify leading-relaxed animate-fade-in" style="animation-delay: 0.6s;">
                         VIHand is the first large-scale glove-worn dataset for visual-inertial hand pose estimation,
                         containing over 1.4 million synchronized RGB-D and IMU frames from 15 subjects.
@@ -166,85 +185,93 @@
             </div>
         </div>
     </header>
-            <!-- 摘要部分 -->
-            <section id="abstract" class="py-12 scroll-mt-24">
-                <div class="max-w-6xl mx-auto">
-                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Abstract</h2>
-                    <p class="text-lg text-gray-700 leading-relaxed mb-6 text-justify">
-                        Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction (HCI), augmented reality (AR) and virtual reality (VR) applications.
-                        However, visual-based approaches often suffer from limited fields of view, occlusions, motion blur and suboptimal lighting.
-                        Approaches based on inertial measurement units (IMUs) face limitations including susceptibility to magnetic interference, cumulative integration errors,
-                        and significant drift, which can severely degrade HPE accuracy. To address these challenges, we present VIHand, the first large-scale glove-worn dataset for visual-inertial HPE,
-                        comprising over 1.4 million synchronized RGB-D and IMU frames from 15 subjects. It includes frame-level 3D joint annotations spanning complex gestures,
-                        filling the gap in multimodal data and enabling cross-modal semantic alignment or complementarity. Based on VIHand, we propose a VIFNet framework,
-                        which integrates visual and inertial signals through an efficient cross-modal interaction strategy to achieve high-precision and robust pose estimation.
-                        To further explore the benefits of VIHand in practical IMU-only configurations, we futher propose VIFNet-S via cross-modal knowledge distillation,
-                        where rich joint representations from VIFNet are transferred to guide the student. This framework supports both multimodal fusion and practical deployment under IMU-only configurations,
-                        significantly enhancing the robustness and generalizability of 3D HPE. Extensive experiments demonstrate its advantages and potential in multimodal fusion, optical robustness,
-                        and IMU-only configurations. The dataset will be publicly released at https://github.com/Shirley0118/VIHand.
-                    </p>
-                </div>
-            </section>
+
+    <!-- 摘要部分 -->
+    <section id="abstract" class="py-12 scroll-mt-24">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Abstract</h2>
+            <p class="text-xl text-gray-700 leading-relaxed mb-6 text-justify">
+                Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction. Existing studies mainly
+rely on either vision or inertial modality. Vision-based methods
+benefit from rich appearance information for high-accuracy HPE
+but sensitive to limited field of views (FoV), occlusion, motion blur
+and lighting. Inertial measurement units (IMUs)-based methods can
+operate independently of optical sensitivity and FoV constraints but
+remain vulnerable to cumulative integration errors and drift. Given
+their complementary strengths, combining dual modalities offers a
+promising direction for HPE. However, the lack of large-scale visualinertial datasets has limited progress in this area. In this paper, we
+construct VIHand, the first large-scale glove-worn dataset for visualinertial HPE, comprising over 1.4 million synchronized RGB-D and
+IMU frames from 15 subjects. To validate the potential of VIHand
+in supporting multimodal fusion and cross-modal distillation, we
+propose visual-inertial fusion network (VIFNet) for dual-modalities
+estimation, and its distilled student model(VIFNet-S) for IMU-only
+evaluation. Experimental results reveal that integrating visual and
+inertial modalities significantly improves the accuracy and robustness of 3D hand pose estimation, particularly under occlusion and
+motion blur. In IMU-only inference even sparse IMU configurations,models distilled from visual-inertial supervision achieve substantial performance gains. We make our data available on the projectwebsite:https://shirley0118.github.io/VlHand.
+            </p>
+        </div>
+    </section>
 
 
 
-
-
-
-
-
-            <!-- 方法部分 -->
-        <section id="method" class="py-12 scroll-mt-24 bg-gray-50 rounded-2xl">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Method</h2>
-
-
-
-                <div class="mt-12 bg-white rounded-xl shadow-lg p-6">
-
-                    <p class="text-gray-700 mb-4 text-sm text-justify">Overall framework. The teacher model (VIFNet) takes a monocular RGB image and sparse IMU data as input, extracts
-                        spatial and temporal features, and fuses them via multi-head attention. The fused features are then decoded by the MANO
-                        head to estimate 3D hand pose. The student model (KDINet), trained on IMU data alone, learns to mimic the teacher's fused
-                        representation through knowledge distillation.</p>
-
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="https://shirley0118.github.io/VIHand/pipeline.jpg" alt="VIHand Architecture Diagram" class="w-full h-auto object-cover rounded-lg">
-                    </div>
+    <section id="method" class="py-12 scroll-mt-24 bg-gray-50 rounded-2xl">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Capture System</h2>
+            <div class="mt-12 bg-white rounded-xl shadow-lg p-6">
+                <p class="text-gray-700 mb-4 text-lg text-justify">VIHand was collected using a synchronized multi-sensor system, consisting of 5 Intel RealSense D415i cameras and a data glove equipped with 7 IMU sensors.</p>
+                <div class="overflow-hidden rounded-lg">
+                    <img src="https://shirley0118.github.io/VIHand/capture.jpg" alt="capture system" class="w-full h-auto object-cover rounded-lg">
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 结果部分 -->
-        <section id="results" class="py-12 scroll-mt-24">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Results</h2>
+    <!-- 方法部分 -->
+    <section id="method" class="py-12 scroll-mt-24 bg-gray-50 rounded-2xl">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Benchmark</h2>
+            <div class="mt-12 bg-white rounded-xl shadow-lg p-6">
+                <p class="text-gray-700 mb-4 text-lg text-justify">Overall framework, The fusion model (VlfNet) takes a monocular RGB and IMU data as input, extracts spatial anc
+                    temporal features, and fuses them via cross attention mechanism, The fused features are then decoded by the MANO head to
+                    estimate 3D hand pose. The student model (VlFNet-S), trained on lMU data alone, learns to mimic the VlNet's fused features
+                    representation through knowledge distillation.</p>
+                <div class="overflow-hidden rounded-lg">
+                    <img src="https://shirley0118.github.io/VIHand/pipeline.jpg" alt="VIHand Architecture Diagram" class="w-full h-auto object-cover rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="grid grid-cols-1 gap-6 mb-10">
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-4">填充</h3>
-                            <p class="text-gray-700 mb-4">
-                                <img src="https://shirley0118.github.io/VIHand/wilor.png" alt="Qualitative Result 1" class="rounded-lg w-full h-auto">
-                            </p>
-                            <div class="h-80">
-                                <canvas id="benchmarkChart"></canvas>
-                            </div>
+    <!-- 结果部分 -->
+    <section id="results" class="py-12 scroll-mt-24">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Results</h2>
+            <div class="grid grid-cols-1 gap-6 mb-10">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                    <div class="p-6">
+<!--                        <p class="text-gray-700 mb-4 text-lg text-justify"> Qualitative results validate that our VIFNet produces much better results than previous methods on VIHand.</p>-->
+                        <p class="text-gray-700 mb-4">
+                            <img src="https://shirley0118.github.io/VIHand/wilor.png" alt="Qualitative Result 1" class="rounded-lg w-full h-auto">
+                        </p>
+<!--                        <p class="text-gray-700 mb-4 text-lg text-justify"> Qualitative results validate that our VIFNet produces much better results than previous methods on VIHand.</p>-->
+                        <div class="h-5">
+                            <canvas id="benchmarkChart"></canvas>
                         </div>
                     </div>
                 </div>
-
             </div>
-        </section>
+        </div>
+    </section>
 
-            <!-- Dataset Directory Structure -->
-            <section id="dataset-structure" class="py-12 scroll-mt-24 bg-gray-100 rounded-2xl">
-                <div class="max-w-6xl mx-auto px-4">
-                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Dataset Directory Structure</h2>
-                    <div class="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
-                        <pre class="text-sm font-mono leading-relaxed">
+    <!-- Dataset Directory Structure -->
+    <section id="dataset-structure" class="py-12 scroll-mt-24 bg-gray-100 rounded-2xl">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Dataset Directory Structure</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
+                <pre class="text-lg font-mono leading-relaxed">
             ${ROOT}
             ├── multidata
-            │   ├── subject0 ~ subject15           # 16 subjects
+            │   ├── subject1 ~ subject15           # 15 subjects
             │   │   ├── ROM01 ~ ROM15              # 15 gesture sequences
             │   │   │   ├── camera0 ~ camera4      # 5 camera views
             │   │   │   │   ├── rgb                # RGB sequences
@@ -256,359 +283,142 @@
             │   │   │...
             │   │...
             ├── annotations
-            │   ├── subject0 ~ subject15
+            │   ├── subject1 ~ subject15
             │   │   ├── ROM01 ~ ROM15
             │   │   │   ├── joint.json
             │   │   │   ├── mano.json
             │   │   │   └── mesh.json
             │   │   │...
             │   │...
+                </pre>
+            </div>
+            <div class="note mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
+                <p class="text-lg">
+                    Note: The above directory structure is a representation of how the dataset is organized. Each directory and file serves a specific purpose in the dataset's organization.
+                </p>
+            </div>
+        </div>
+    </section>
 
-                        </pre>
+    <!-- Dataset Details -->
+    <section class="py-12 scroll-mt-24">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Dataset Details</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 左侧列：两个表格 -->
+                <div class="space-y-8">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-6 border-b border-gray-200">
+                            <h3 class="text-xl font-bold text-center">Frame Distribution by Category</h3> <!-- 标题居中 -->
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-row-height"> <!-- 应用行高调整 -->
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="table-cell-padding text-left" style="width: 60%;">Category</th>
+                                        <th class="table-cell-padding text-left" style="width: 40%;">Total Frames</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="table-cell-padding"><div class="text-lg font-bold text-gray-900">Train Set</div></td>
+                                        <td class="table-cell-padding"><div class="text-lg font-bold gradient-bg inline-block px-2 py-0.5 rounded">1.06M</div></td>
+                                    </tr>
+                                    <!-- 删除了Validation Set行 -->
+                                    <tr>
+                                        <td class="table-cell-padding"><div class="text-lg font-bold text-gray-900">Test Set</div></td>
+                                        <td class="table-cell-padding"><div class="text-lg font-bold bg-gray-200 text-gray-900 inline-block px-2 py-0.5 rounded">340K</div></td> <!-- 取消红色背景 -->
+                                    </tr>
+                                    <tr class="bg-gradient-to-r from-blue-500 to-purple-600">
+                                        <td class="table-cell-padding"><div class="text-lg font-bold text-white">Total</div></td>
+                                        <td class="table-cell-padding"><div class="text-lg font-bold text-white">1.4M</div></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <div class="note mt-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
-                        <p class="text-sm">
-                            Note: The above directory structure is a representation of how the dataset is organized. Each directory and file serves a specific purpose in the dataset's organization.
-                        </p>
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+<!--                        <div class="p-6 border-b border-gray-200">-->
+<!--                            <h3 class="text-xl font-bold text-center">Subject Information</h3> &lt;!&ndash; 标题居中 &ndash;&gt;-->
+<!--                        </div>-->
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-row-height"> <!-- 应用行高调整 -->
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="table-cell-padding text-left" style="width: 60%;">Subject ID</th>
+                                        <th class="table-cell-padding text-left" style="width: 40%;">Gender</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200" id="subjectTable">
+                                    <!-- 动态生成的内容 -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-
-
-
-                <style type="text/tailwindcss">
-                    @layer utilities {
-                        .content-auto {
-                            content-visibility: auto;
-                        }
-                        .data-card {
-                            @apply bg-white rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl;
-                        }
-                        .gradient-bg {
-                            @apply bg-gradient-to-r from-primary to-secondary;
-                        }
-                        .text-gradient {
-                            @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
-                        }
-                        .animate-fade-in {
-                            animation: fadeIn 0.5s ease-in-out;
-                        }
-                        .female-row {
-                            @apply bg-pink-100 hover:bg-pink-200 transition-colors duration-200;
-                        }
-                        .male-row {
-                            @apply bg-blue-100 hover:bg-blue-200 transition-colors duration-200;
-                        }
-                        .table-fixed-layout {
-                            table-layout: fixed;
-                        }
-                        .table-cell-padding {
-                            padding: 0.25rem 0.5rem;
-                        }
-                        .table-header {
-                            @apply text-xs font-medium text-gray-500 uppercase tracking-wider;
-                        }
-                        @keyframes fadeIn {
-                            from { opacity: 0; transform: translateY(10px); }
-                            to { opacity: 1; transform: translateY(0); }
-                        }
-                    }
-                </style>
-            </head>
-            <body class="bg-gray-50 font-inter text-dark">
-                <main class="max-w-6xl mx-auto px-4 py-12">
-                    <!-- Frame Distribution Table -->
-                    <section class="animate-fade-in mb-12" style="animation-delay: 0.3s">
-
-                        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Detailed Breakdown</h2>
-
-                        <!-- 修改为英文文本 -->
-                        <p class="text-base font-medium mb-4 text-gray-700 max-w-2xl mx-auto">In our experiment, the dataset is divided as follows:</p>
-
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-2xl mx-auto"> <!-- 进一步限制最大宽度 -->
-                            <div class="p-6 border-b border-gray-200">
-                                <h3 class="text-xl font-bold">Frame Distribution by Category</h3>
-                            </div>
-
-                            <div class="overflow-x-auto">
-                                <table class="w-full table-fixed-layout">
-                                    <thead>
-                                        <tr class="bg-gray-50">
-                                            <th class="table-cell-padding text-left table-header" style="width: 60%;">Category</th> <!-- 调整列宽比例 -->
-                                            <th class="table-cell-padding text-left table-header" style="width: 40%;">Total Frames</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr class="bg-gray-50">
-                                            <td class="table-cell-padding whitespace-nowrap overflow-hidden text-ellipsis">
-                                                <div class="text-xs font-bold text-gray-900">Train Set</div>
-                                            </td>
-                                            <td class="table-cell-padding whitespace-nowrap">
-                                                <div class="text-xs font-bold gradient-bg inline-block px-2 py-0.5 rounded">2.8M</div>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-gray-50">
-                                            <td class="table-cell-padding whitespace-nowrap overflow-hidden text-ellipsis">
-                                                <div class="text-xs font-bold text-gray-900">Validation Set</div>
-                                            </td>
-                                            <td class="table-cell-padding whitespace-nowrap">
-                                                <div class="text-xs font-bold bg-purple-600 text-white inline-block px-2 py-0.5 rounded">380K</div>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-gray-50">
-                                            <td class="table-cell-padding whitespace-nowrap overflow-hidden text-ellipsis">
-                                                <div class="text-xs font-bold text-gray-900">Test Set</div>
-                                            </td>
-                                            <td class="table-cell-padding whitespace-nowrap">
-                                                <div class="text-xs font-bold bg-red-600 text-white inline-block px-2 py-0.5 rounded">1.7M</div>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-gradient-to-r from-blue-500 to-purple-600">
-                                            <td class="table-cell-padding whitespace-nowrap overflow-hidden text-ellipsis">
-                                                <div class="text-xs font-bold text-white">Total</div>
-                                            </td>
-                                            <td class="table-cell-padding whitespace-nowrap">
-                                                <div class="text-xs font-bold text-white">4.9M</div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <!-- 右侧列：长图片 -->
+                <div>
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col">
+                        <div class="p-6 border-b border-gray-200">
+                            <h3 class="text-xl font-bold text-center">Data Sample</h3> <!-- 标题居中 -->
                         </div>
-                    </section>
-
-                    <!-- Subject Information Section with Introduction -->
-                    <section class="animate-fade-in mt-8" style="animation-delay: 0.5s">
-                        <p class="text-lg font-medium mb-6 text-gray-800 max-w-2xl mx-auto">
-                            The dataset includes 16 subjects (subject0 to subject15) with balanced gender distribution,
-                            designed to cover diverse hand movement scenarios. Each subject contributed to the
-                            collection of hand interaction data, which forms the basis for training and evaluating
-                            hand pose estimation models.
-                        </p>
-
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-2xl mx-auto"> <!-- 进一步限制最大宽度 -->
-                            <div class="p-6 border-b border-gray-200"> <!-- 恢复分隔线 -->
-                                <h3 class="text-xl font-bold">Subject Information</h3> <!-- 恢复标题 -->
-                            </div>
-
-                            <div class="overflow-x-auto">
-                                <table class="w-full table-fixed-layout">
-                                    <thead>
-                                        <tr class="bg-gray-50">
-                                            <th class="table-cell-padding text-left table-header" style="width: 60%;">Subject ID</th> <!-- 调整列宽比例与第一个表格对齐 -->
-                                            <th class="table-cell-padding text-left table-header" style="width: 40%;">Gender</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200" id="subjectTable">
-                                        <!-- Dynamically generated content -->
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="flex-grow flex items-center justify-center p-6">
+                            <img src="https://shirley0118.github.io/VIHand/data_sample.jpg" alt="Data Sample" class="w-full h-auto rounded-lg shadow-md">
                         </div>
-                    </section>
-                </main>
-
-                <script>
-                    // Smooth scrolling
-                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                        anchor.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        });
-                    });
-
-                    // Card hover effects
-                    document.querySelectorAll('.data-card').forEach(card => {
-                        card.addEventListener('mouseenter', () => {
-                            card.style.transform = 'translateY(-5px)';
-                        });
-                        card.addEventListener('mouseleave', () => {
-                            card.style.transform = 'translateY(0)';
-                        });
-                    });
-
-                    // Generate subject table content
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const table = document.getElementById('subjectTable');
-                        const subjects = [
-                            { id: 'subject0', gender: 'Female' },
-                            { id: 'subject1', gender: 'Male' },
-                            { id: 'subject2', gender: 'Male' },
-                            { id: 'subject3', gender: 'Male' },
-                            { id: 'subject4', gender: 'Male' },
-                            { id: 'subject5', gender: 'Female' },
-                            { id: 'subject6', gender: 'Female' },
-                            { id: 'subject7', gender: 'Male' },
-                            { id: 'subject8', gender: 'Male' },
-                            { id: 'subject9', gender: 'Male' },
-                            { id: 'subject10', gender: 'Male' },
-                            { id: 'subject11', gender: 'Male' },
-                            { id: 'subject12', gender: 'Male' },
-                            { id: 'subject13', gender: 'Female' },
-                            { id: 'subject14', gender: 'Male' },
-                            { id: 'subject15', gender: 'Female' },
-                            { id: 'subject16', gender: 'Female' }
-                        ];
-
-                        subjects.forEach(subject => {
-                            const row = document.createElement('tr');
-                            row.className = subject.gender === 'Female' ? 'female-row' : 'male-row';
-
-                            const idCell = document.createElement('td');
-                            idCell.className = 'table-cell-padding whitespace-nowrap overflow-hidden text-ellipsis';
-                            idCell.innerHTML = `<div class="text-xs font-bold ${subject.gender === 'Female' ? 'text-pink-900' : 'text-blue-900'}">${subject.id}</div>`;
-
-                            const genderCell = document.createElement('td');
-                            genderCell.className = 'table-cell-padding whitespace-nowrap';
-                            genderCell.innerHTML = `
-                                <div class="flex items-center">
-                                    <span class="w-2.5 h-2.5 rounded-full mr-1.5 ${subject.gender === 'Female' ? 'bg-pink-600' : 'bg-blue-600'}"></span>
-                                    <span class="text-xs font-medium ${subject.gender === 'Female' ? 'text-pink-900' : 'text-blue-900'}">${subject.gender}</span>
-                                </div>
-                            `;
-
-                            row.appendChild(idCell);
-                            row.appendChild(genderCell);
-                            table.appendChild(row);
-                        });
-                    });
-                </script>
-            </body>
-            </html>
-        <!-- 引用部分
-        <section id="citation" class="py-12 scroll-mt-24">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">Citation</h2>
-
-                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-                    <h3 class="text-xl font-semibold mb-4">If you find our work useful, please cite:</h3>
-                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                        <pre class="text-sm font-mono text-gray-700 overflow-x-auto">@inproceedings{Wang2025VIHand,
-    author    = {Xinyi Wang and Pengfei Ren and Haoyang Zhang and Xin Sheng and Da Li and Liang Xie and Yue Gao and Erwei Yin},
-    title     = {VIHand: Enhancing Hand Pose Estimation with Visual and Sparse IMU Fusion Benchmark},
-    booktitle = {Proceedings of the 33rd ACM International Conference on Multimedia (MM '25)},
-    year      = {2025},
-    publisher = {ACM},
-    address   = {New York, NY, USA},
-    pages     = {8 pages},
-    doi       = {XXXXXXX.XXXXXXX}
-}</pre>
                     </div>
-                    <p class="text-gray-700">
-                        This BibTeX entry will cite our ACM MM 2025 paper where VIHand is introduced and described in detail.
-                    </p>
-                </div>
-                 -->
-                <div class="bg-white rounded-xl shadow-lg p-6 max-w-6xl mx-auto">
-                    <h3 class="text-xl font-semibold mb-4">Related Works</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                                <i class="fa fa-file-text-o text-primary"></i>
-                            </div>
-                            <div>
-                                <a href="#" class="font-medium hover:text-primary transition-colors">A Dual-Branch Self-Boosting Framework for Self-Supervised 3D Hand Pose Estimation</a>
-                                <p class="text-gray-600 text-sm">Pengfei Ren et al.,TIP 2022</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                                <i class="fa fa-file-text-o text-primary"></i>
-                            </div>
-                            <div>
-                                <a href="#" class="font-medium hover:text-primary transition-colors">Mining multi-view information: a strong self-supervised framework for depth-based 3D hand pose and mesh estimation</a>
-                                <p class="text-gray-600 text-sm">Pengfei Ren et al.,CVPR 2022</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                                <i class="fa fa-file-text-o text-primary"></i>
-                            </div>
-                            <div>
-                                <a href="#" class="font-medium hover:text-primary transition-colors">Embodied Hands: Modeling and Capturing Hands and Bodies Together</a>
-                                <p class="text-gray-600 text-sm">Javier Romero et al.,TOG 2017</p>
-                            </div>
-                        </li>
-
-                    </ul>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-
-
-</script>
-</body>
-</html>
-
-    </main>
+    <div class="bg-white rounded-xl shadow-lg p-6 max-w-6xl mx-auto">
+        <h3 class="text-xl font-semibold mb-4">Related Works</h3>
+        <ul class="space-y-4">
+            <li class="flex items-start">
+                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <i class="fa fa-file-text-o text-primary"></i>
+                </div>
+                <div>
+                    <a href="#" class="font-medium hover:text-primary transition-colors">A Dual-Branch Self-Boosting Framework for Self-Supervised 3D Hand Pose Estimation</a>
+                    <p class="text-gray-600 text-sm">Pengfei Ren et al.,TIP 2022</p>
+                </div>
+            </li>
+            <li class="flex items-start">
+                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <i class="fa fa-file-text-o text-primary"></i>
+                </div>
+                <div>
+                    <a href="#" class="font-medium hover:text-primary transition-colors">Mining multi-view information: a strong self-supervised framework for depth-based 3D hand pose and mesh estimation</a>
+                    <p class="text-gray-600 text-sm">Pengfei Ren et al.,CVPR 2022</p>
+                </div>
+            </li>
+            <li class="flex items-start">
+                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <i class="fa fa-file-text-o text-primary"></i>
+                </div>
+                <div>
+                    <a href="#" class="font-medium hover:text-primary transition-colors">Embodied Hands: Modeling and Capturing Hands and Bodies Together</a>
+                    <p class="text-gray-600 text-sm">Javier Romero et al.,TOG 2017</p>
+                </div>
+            </li>
+        </ul>
+    </div>
 
     <!-- Acknowledgments部分 -->
     <section id="acknowledgments" class="py-12 scroll-mt-24">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">Acknowledgments</h2>
             <p class="text-gray-700 text-justify">
-                This work was supported in part by the grants from the National Natural Science Foundation of China under Grant 62332019, the National Key Research and Development Program of China (2023YFF-1203900, 2023YFF1203903), Sponsored by Beijing Nova Program (20240484513).
+                This work was supported in part by the grants from the National
+Natural Science Foundation of China under Grant 62332019, the Na
+tional Key Research and Development Program of China (2023YFF-
+1203900,2023YFF1203903), Sponsored by Beijing Nova Program
+(20240484513).
             </p>
         </div>
     </section>
-
-    <!-- 底部
-    <footer class="bg-dark text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">VIHand</h3>
-                    <p class="text-gray-400">
-                       VIHand: Enhancing 3D Hand Pose Estimation with Visual-Inertial Benchmark
-                    </p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#abstract" class="text-gray-400 hover:text-white transition-colors">Abstract</a></li>
-                        <li><a href="#dataset" class="text-gray-400 hover:text-white transition-colors">Dataset</a></li>
-                        <li><a href="#method" class="text-gray-400 hover:text-white transition-colors">Method</a></li>
-                        <li><a href="#results" class="text-gray-400 hover:text-white transition-colors">Results</a></li>
-                        <!-- <li><a href="#paper" class="text-gray-400 hover:text-white transition-colors">Paper</a></li> -->
-                        <!-- <li><a href="#citation" class="text-gray-400 hover:text-white transition-colors">Citation</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Contact</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fa fa-envelope-o text-primary mr-2"></i>
-                            <a href="mailto:georgios@cmu.edu" class="text-gray-400 hover:text-white transition-colors"></a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-map-marker text-primary mr-2"></i>
-                            <span class="text-gray-400"></span>
-                        </li>
-                    </ul>
-                    <div class="flex space-x-4 mt-4">
-                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors">
-                            <i class="fa fa-github"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors">
-                            <i class="fa fa-youtube-play"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
-                <p>© 2025 VIHand. All rights reserved.</p>
-            </div>
-        </div>
-    </footer> --> -->
 
     <script>
         // 导航栏滚动效果
@@ -649,3 +459,49 @@
             });
         });
 
+        // 生成受试者表格内容
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = document.getElementById('subjectTable');
+            const subjects = [
+                { id: 'subject1', gender: 'Male' },
+                { id: 'subject2', gender: 'Female' },
+                { id: 'subject3', gender: 'Male' },
+                { id: 'subject4', gender: 'Male' },
+                { id: 'subject5', gender: 'Female' },
+                { id: 'subject6', gender: 'Female' },
+                { id: 'subject7', gender: 'Male' },
+                { id: 'subject8', gender: 'Male' },
+                { id: 'subject9', gender: 'Female' },
+                { id: 'subject10', gender: 'Male' },
+                { id: 'subject11', gender: 'Female' },
+                { id: 'subject12', gender: 'Male' },
+                { id: 'subject13', gender: 'Female' },
+                { id: 'subject14', gender: 'Male' },
+                { id: 'subject15', gender: 'Female' }
+            ];
+
+            subjects.forEach(subject => {
+                const row = document.createElement('tr');
+                row.className = 'h-8';  /* 固定行高 */
+
+                const idCell = document.createElement('td');
+                idCell.className = 'table-cell-padding whitespace-nowrap';
+                idCell.innerHTML = `<div class="text-sm font-medium ${subject.gender === 'Female' ? 'text-pink-900' : 'text-blue-900'}">${subject.id}</div>`;
+
+                const genderCell = document.createElement('td');
+                genderCell.className = 'table-cell-padding whitespace-nowrap';
+                genderCell.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="w-2.5 h-2.5 rounded-full mr-1.5 ${subject.gender === 'Female' ? 'bg-pink-600' : 'bg-blue-600'}"></span>
+                        <span class="text-sm font-medium ${subject.gender === 'Female' ? 'text-pink-900' : 'text-blue-900'}">${subject.gender}</span>
+                    </div>
+                `;
+
+                row.appendChild(idCell);
+                row.appendChild(genderCell);
+                table.appendChild(row);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -191,19 +191,15 @@
         <div class="max-w-6xl mx-auto">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Abstract</h2>
             <p class="text-xl text-gray-700 leading-relaxed mb-6 text-justify">
-            Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction.
-                Existing 3D HPE solutions predominantly rely on vision-based or inertial measurement units (IMUs)-based approaches.
-                Vision-based methods benefit from rich appearance information for high-accuracy HPE but sensitive to field of views (FoV), occlusion, motion blur and lighting.
-                IMU-based methods can operate immune to optical sensitivity and FoV constraints but remain vulnerable to cumulative integration errors and drift.
-                Given their complementary strengths, combining dual modalities offers a promising direction for HPE in complex environments.
-                However, the lack of large-scale visual-inertial datasets has limited progress in this area.
-                In this paper, we construct VIHand, the first large-scale glove-worn dataset for visual-inertial HPE, comprising over 1.4 million synchronized RGB-D and IMU frames from 15 subjects.
-                To validate the potential of VIHand in supporting multimodal fusion and cross-modal distillation, we propose visual-inertial fusion network (VIFNet) for dual-modalities estimation,
-                and its distilled student model (VIFNet-S) for IMU-only evaluation.
-                Experimental results reveal that integrating visual and inertial modalities significantly improves the accuracy and robustness of 3D HPE,
-                particularly under occlusion and motion blur.
-                In IMU-only inference even sparse IMU configurations,
-                models distilled from visual-inertial supervision achieve substantial performance gains,
+           Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction. Existing 3D HPE solutions predominantly rely on vision-based or inertial measurement units (IMUs)-based methods. 
+                Vision-based methods benefit from rich appearance information for high-accuracy HPE but are sensitive to field of view (FoV), occlusion, motion blur and lighting. 
+                IMU-based methods can operate immune to optical sensitivity and FoV constraints but remain vulnerable to cumulative integration errors and drift. Given their complementary strengths, 
+                combining dual modalities offers a promising direction for HPE in complex environments. However, the lack of large-scale visual-inertial datasets has limited progress in this area. 
+                In this paper, we construct VIHand, the first large-scale glove-worn dataset for visual-inertial HPE, comprising over 1.4 million synchronized RGB-D and IMU frames from 15 subjects. 
+                It enables comprehensive research in HPE tasks, such as multimodal fusion and cross-modal knowledge transfer. Building on VIHand, we propose visual-inertial fusion network (VIFNet) for dual-modalities estimation, 
+                and its distilled student model (VIFNet-S) for IMU-only evaluation. Experimental results reveal that integrating visual and inertial modalities significantly improves the accuracy and robustness of 3D HPE, 
+                particularly under occlusion and motion blur. 
+                In IMU-only inference even sparse IMU configurations, models distilled from visual-inertial supervision achieve substantial performance gains, 
                 enabling robust HPE for challenging optical sensitive scenarios.
             </p>
         </div>

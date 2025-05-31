@@ -178,8 +178,8 @@
                     <p class="mt-6 text-lg text-gray-700 text-justify leading-relaxed animate-fade-in" style="animation-delay: 0.6s;">
                         VIHand is the first large-scale glove-worn dataset for visual-inertial hand pose estimation,
                         containing over 1.4 million synchronized RGB-D and IMU frames from 15 subjects.
-                        It provides frame-level 3D joint annotations across complex hand gestures,
-                        enabling cross-modal semantic alignment and complementarity for advanced hand pose estimation research.
+                        It provides accurate frame-level 3D joint annotations across complex gestures,
+                        enabling comprehensive research in HPE tasks, including multimodal fusion, cross-modal knowledge transfer and cross-modal data generation, etc.
                     </p>
                 </div>
             </div>
@@ -191,23 +191,20 @@
         <div class="max-w-6xl mx-auto">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6 text-center">Abstract</h2>
             <p class="text-xl text-gray-700 leading-relaxed mb-6 text-justify">
-                Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction. Existing studies mainly
-rely on either vision or inertial modality. Vision-based methods
-benefit from rich appearance information for high-accuracy HPE
-but sensitive to limited field of views (FoV), occlusion, motion blur
-and lighting. Inertial measurement units (IMUs)-based methods can
-operate independently of optical sensitivity and FoV constraints but
-remain vulnerable to cumulative integration errors and drift. Given
-their complementary strengths, combining dual modalities offers a
-promising direction for HPE. However, the lack of large-scale visualinertial datasets has limited progress in this area. In this paper, we
-construct VIHand, the first large-scale glove-worn dataset for visualinertial HPE, comprising over 1.4 million synchronized RGB-D and
-IMU frames from 15 subjects. To validate the potential of VIHand
-in supporting multimodal fusion and cross-modal distillation, we
-propose visual-inertial fusion network (VIFNet) for dual-modalities
-estimation, and its distilled student model(VIFNet-S) for IMU-only
-evaluation. Experimental results reveal that integrating visual and
-inertial modalities significantly improves the accuracy and robustness of 3D hand pose estimation, particularly under occlusion and
-motion blur. In IMU-only inference even sparse IMU configurations,models distilled from visual-inertial supervision achieve substantial performance gains. We make our data available on the projectwebsite:https://shirley0118.github.io/VlHand.
+            Accurate and robust 3D hand pose estimation (HPE) plays a crucial role in human-computer interaction.
+                Existing 3D HPE solutions predominantly rely on vision-based or inertial measurement units (IMUs)-based approaches.
+                Vision-based methods benefit from rich appearance information for high-accuracy HPE but sensitive to field of views (FoV), occlusion, motion blur and lighting.
+                IMU-based methods can operate immune to optical sensitivity and FoV constraints but remain vulnerable to cumulative integration errors and drift.
+                Given their complementary strengths, combining dual modalities offers a promising direction for HPE in complex environments.
+                However, the lack of large-scale visual-inertial datasets has limited progress in this area.
+                In this paper, we construct VIHand, the first large-scale glove-worn dataset for visual-inertial HPE, comprising over 1.4 million synchronized RGB-D and IMU frames from 15 subjects.
+                To validate the potential of VIHand in supporting multimodal fusion and cross-modal distillation, we propose visual-inertial fusion network (VIFNet) for dual-modalities estimation,
+                and its distilled student model (VIFNet-S) for IMU-only evaluation.
+                Experimental results reveal that integrating visual and inertial modalities significantly improves the accuracy and robustness of 3D HPE,
+                particularly under occlusion and motion blur.
+                In IMU-only inference even sparse IMU configurations,
+                models distilled from visual-inertial supervision achieve substantial performance gains,
+                enabling robust HPE for challenging optical sensitive scenarios.
             </p>
         </div>
     </section>
@@ -218,7 +215,12 @@ motion blur. In IMU-only inference even sparse IMU configurations,models distill
         <div class="max-w-6xl mx-auto">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-10 text-center">Capture System</h2>
             <div class="mt-12 bg-white rounded-xl shadow-lg p-6">
-                <p class="text-gray-700 mb-4 text-lg text-justify">VIHand was collected using a synchronized multi-sensor system, consisting of 5 Intel RealSense D415i cameras and a data glove equipped with 7 IMU sensors.</p>
+                <p class="text-gray-700 mb-4 text-lg text-justify">VIHand was collected using a synchronized multi-sensor system, consisting of 5 Intel RealSense D415i cameras and a data glove equipped with 7 IMU sensors.
+                5 cameras were placed at diverse viewpoints around the hand to synchronously capture high-resolution RGB-D stream at 1280$\times$720 resolution and 30 FPS.
+                    To capture the dynamic inertial data of hand motion, 7 IMUs were embedded in the data glove at the wrist, palm,
+thumb,          index, middle finger, ring finger and little finger.
+
+                </p>
                 <div class="overflow-hidden rounded-lg">
                     <img src="https://shirley0118.github.io/VIHand/capture.jpg" alt="capture system" class="w-full h-auto object-cover rounded-lg">
                 </div>
@@ -249,9 +251,11 @@ motion blur. In IMU-only inference even sparse IMU configurations,models distill
             <div class="grid grid-cols-1 gap-6 mb-10">
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
                     <div class="p-6">
-<!--                        <p class="text-gray-700 mb-4 text-lg text-justify"> Qualitative results validate that our VIFNet produces much better results than previous methods on VIHand.</p>-->
+                        <p class="text-gray-700 mb-4 text-lg text-justify"> Qualitative results validate that our VIFNet produces much better results than previous methods on VIHand.
+                            This demonstrates that integrating visual and inertial modalities significantly improves the accuracy and robustness of 3D HPE,
+                            particularly under occlusion and motion blur scenarios.</p>
                         <p class="text-gray-700 mb-4">
-                            <img src="https://shirley0118.github.io/VIHand/wilor.png" alt="Qualitative Result 1" class="rounded-lg w-full h-auto">
+                            <img src="https://shirley0118.github.io/VIHand/sample.png" alt="Qualitative Result 1" class="rounded-lg w-full h-auto">
                         </p>
 <!--                        <p class="text-gray-700 mb-4 text-lg text-justify"> Qualitative results validate that our VIFNet produces much better results than previous methods on VIHand.</p>-->
                         <div class="h-5">
@@ -411,11 +415,10 @@ motion blur. In IMU-only inference even sparse IMU configurations,models distill
         <div class="max-w-4xl mx-auto">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">Acknowledgments</h2>
             <p class="text-gray-700 text-justify">
-                This work was supported in part by the grants from the National
-Natural Science Foundation of China under Grant 62332019, the Na
-tional Key Research and Development Program of China (2023YFF-
-1203900,2023YFF1203903), Sponsored by Beijing Nova Program
-(20240484513).
+                This work was supported in part by the National Natural Science Foundation of China (Nos. 62332019, 62406039),
+the National Key R&D Program of China (Nos. 2023YFF1203900, 2023YFF1203903),
+the China Postdoctoral Science Foundation (Nos. 2023TQ0039, 2024M750257, GZC20230320),
+and the Beijing Nova Program (No. 20240484513)
             </p>
         </div>
     </section>

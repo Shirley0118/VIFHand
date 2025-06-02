@@ -268,11 +268,7 @@ class SelfDataset(Dataset):
 
                 frame_num = self.extract_integer_from_filename(image_name)
                 self.frame_nums.append(frame_num)
-                # self.camera_id
-                # joint2d = np.array(key_all_data["j2d"]["camera0"][image_name], dtype=np.float32).reshape(21, 2)
-                # joint3d = np.array(key_all_data["j3d"][image_name], dtype=np.float32).reshape(21, 3)
                 mano_paras = np.array(mano_paras_all[image_name], dtype=np.float32)
-                # bbox = np.array(bbox_all_data[image_name], dtype=np.float32)
                 center3d = np.array(center_all[image_name], dtype=np.float32)
 
                 if self.use_imu:

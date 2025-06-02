@@ -9,7 +9,7 @@ import re
 from scipy.spatial.transform import Rotation as R
 from torch.utils.data import ConcatDataset
 import torch.nn.functional as F
-from dataprocess.mano_layer_self import MANO_SMPL, Render
+from mano_layer import MANO_SMPL, Render
 
 # Path to the MANO_RIGHT model pickle file
 mano_path = 'D:/OneDrive/code/mano_v1_2/models/MANO_RIGHT.pkl'

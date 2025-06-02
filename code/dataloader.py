@@ -444,7 +444,7 @@ class SelfDataset(Dataset):
 
 
 if __name__ == "__main__":
-    # List of 15 subjects
+    # List of subjects
     all_subjects = [
         'subject1', 'subject2', 'subject3', 'subject4', 'subject5',
         'subject6', 'subject7', 'subject8', 'subject9', 'subject10',
@@ -467,7 +467,6 @@ if __name__ == "__main__":
             intrinsics.squeeze(0)[1][2]  # ppy
         ], dtype=torch.float32)
 
-        # Create dataset for each subject
         dataset = SelfDataset(
             data_root=data_root_dir,
             label_root=label_root_dir,
@@ -480,7 +479,5 @@ if __name__ == "__main__":
         )
         train_datasets.append(dataset)
 
-    # Combine all subject datasets into one
     train_dataset = ConcatDataset(train_datasets)
-    # Create data loader for training
     train_loader = DataLoader(train_dataset, batch_size=20, shuffle=True, num_workers=4)
